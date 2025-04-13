@@ -1,0 +1,1 @@
+Exercitando toda a matéria que foi passada até o momento.
