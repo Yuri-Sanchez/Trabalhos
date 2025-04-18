@@ -19,34 +19,43 @@ IMC >= 40            Obesidade grau III
 #include<locale.h>
 #include<stdlib.h>
 
+float calcularIMC(float p, float a){
+    return p / (a * a);
+}
+
+float calcularPorcentagem(int valor, int total){
+    return (valor * 100.0) / total;
+}
+
+
 int main(){
     setlocale(LC_ALL, "Portuguese_Brazil");
 
-    int qtd_pacientes;
+    int qtd;
     float peso, altura, imc;
-    int abaixo_peso = 0, peso_normal = 0, sobrepeso = 0;
+    int abaixo = 0, normal = 0, sobrepeso = 0;
     int obesidade_i = 0, obesidade_ii = 0, obesidade_iii = 0;
 
     printf("Quantidade de pacientes a serem avaliados: ");
-    scanf("%d", &qtd_pacientes);
+    scanf("%d", &qtd);
 
-    for(int i = 1; i <= qtd_pacientes; i++){
+    for(int i = 1; i <= qtd; i++){
         printf("\n%d° paciente\n", i);
         printf("Peso (kg): ");
         scanf("%f", &peso);
         printf("Altura (m): ");
         scanf("%f", &altura);
 
-        imc = peso / (altura * altura);
+        imc = calcularIMC(peso, altura);
         printf("IMC do paciente: %.2f\n", imc);
 
         if(imc < 18.5) {
             printf("Abaixo do peso!\n");
-            abaixo_peso++;
+            abaixo++;
         }
         else if(imc < 25) {
             printf("Peso normal!\n");
-            peso_normal++;
+            normal++;
         }
         else if(imc < 30) {
             printf("Sobrepeso!\n");
@@ -68,12 +77,12 @@ int main(){
 
     printf("\nRelatório Final:\n");
     printf("----------------\n");
-    printf("Abaixo do peso: %d paciente(s)\n", abaixo_peso);
-    printf("Peso normal: %d paciente(s)\n", peso_normal);
-    printf("Sobrepeso: %d paciente(s)\n", sobrepeso);
-    printf("Obesidade grau I: %d paciente(s)\n", obesidade_i);
-    printf("Obesidade grau II: %d paciente(s)\n", obesidade_ii);
-    printf("Obesidade grau III: %d paciente(s)\n", obesidade_iii);
+    printf("Abaixo do peso: %d(%.1f%%)\n", abaixo, calcularPorcentagem(abaixo, qtd));
+    printf("Peso normal: %d(%.1f%%)\n", normal, calcularPorcentagem(normal, qtd));
+    printf("Sobrepeso: %d(%.1f%%)\n", sobrepeso, calcularPorcentagem(sobrepeso, qtd));
+    printf("Obesidade grau I: %d(%.1f%%)\n", obesidade_i, calcularPorcentagem(obesidade_i, qtd));
+    printf("Obesidade grau II: %d(%.1f%%)\n", obesidade_ii, calcularPorcentagem(obesidade_ii, qtd));
+    printf("Obesidade grau III: %d(%.1f%%)\n", obesidade_iii, calcularPorcentagem(obesidade_iii, qtd));
 
     return 0;
 }
